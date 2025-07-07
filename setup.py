@@ -8,4 +8,9 @@ setup(name='scipyconference',
       author='SciPy Conference Organizers',
       include_package_data=True,
       package_data={'scipyconference': ['puns.json']},
+      install_requires=[
+          'numpy',
+          'astropy',
+          'pandas',
+      ]
       )
