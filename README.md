@@ -1,3 +1,15 @@
-# Start of the SciPy Puns repo
+# puns-scipyconference
 
-Clues for usage are on your T-shirt.
+Making the T-shirt puns work!
+
+Made with ❤️ by Brigitta Sipőcz (bsipocz) and Eric J. Ma (@ericmjl).
+
+## Get started for development
+
+To get started:
+
+```bash
+git clone git@github.com:scipy-conference/puns-scipyconference.git
+cd puns-scipyconference
+pixi install
+```
