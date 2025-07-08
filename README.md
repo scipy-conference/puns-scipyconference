@@ -2,7 +2,7 @@
 
 Making the T-shirt puns work!
 
-Made with ❤️ by Brigitta Sipőcz (bsipocz) and Eric J. Ma (@ericmjl).
+Made with ❤️ by the SciPy Conference Organizers.
 
 ## Installation
 
