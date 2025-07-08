@@ -88,7 +88,7 @@ def create_puns(number: int, prompt: str = ""):
                 return
 
             for i in range(number):
-                print()
+                print("🤖🐍:")
                 punbot(prompt)
         else:
             # Use community-curated puns from JSONL file
