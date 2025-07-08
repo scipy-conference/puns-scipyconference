@@ -104,5 +104,4 @@ def create_puns(number: int, prompt: str = ""):
 
             for pun_data in selected_puns:
                 print()
-                print(f"Pun: {pun_data['pun']}")
-                print(f"By: @{pun_data['github_username']}")
+                print(f"@{pun_data['github_username']}: {pun_data['pun']}")
