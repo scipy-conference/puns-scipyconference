@@ -2,10 +2,14 @@
 
 import os
 
-import llamabot as lmb
+try:
+    import llamabot as lmb
+
+    LLAMABOT_AVAILABLE = True
+except ImportError:
+    LLAMABOT_AVAILABLE = False
 
 
-@lmb.prompt("system")
 def punbot_sysprompt():
     """You are a witty, science-savvy language model specializing in generating clever
     and contextually appropriate puns. Your audience is the SciPy conference community:
@@ -31,12 +35,31 @@ def punbot_sysprompt():
     Generate a pun or short one-liner that would make a SciPy attendee smile, chuckle,
     or roll their eyes appreciatively.
     """
+    if LLAMABOT_AVAILABLE:
+        return lmb.prompt("system")(punbot_sysprompt.__doc__)
+    else:
+        return punbot_sysprompt.__doc__
 
 
-punbot = lmb.SimpleBot(
-    system_prompt=punbot_sysprompt(),
-    model_name=os.getenv("PUNBOT_MODEL_NAME", "gpt-4.1"),
-    api_base=os.getenv("PUNBOT_API_BASE", "https://api.openai.com/v1"),
-    api_key=os.getenv("PUNBOT_API_KEY", ""),
-    temperature=float(os.getenv("PUNBOT_TEMPERATURE", 2.7)),
-)
+def _create_punbot():
+    """Create the punbot instance if llamabot is available."""
+    if not LLAMABOT_AVAILABLE:
+        raise ImportError(
+            "llamabot is required for LLM-generated puns. "
+            "Install it with: pip install scipyconference[llm]"
+        )
+
+    return lmb.SimpleBot(
+        system_prompt=punbot_sysprompt(),
+        model_name=os.getenv("PUNBOT_MODEL_NAME", "gpt-4.1"),
+        api_base=os.getenv("PUNBOT_API_BASE", "https://api.openai.com/v1"),
+        api_key=os.getenv("PUNBOT_API_KEY", ""),
+        temperature=float(os.getenv("PUNBOT_TEMPERATURE", 2.7)),
+    )
+
+
+# Create punbot instance only if llamabot is available
+if LLAMABOT_AVAILABLE:
+    punbot = _create_punbot()
+else:
+    punbot = None

@@ -1,4 +1,5 @@
-{"pun":{"0":"this is a pun",
-        "1":"this is another pun",
-       }
-}
+{"pun": "this is a pun", "github_username": "example_user"}
+{"pun": "this is another pun", "github_username": "another_user"}
+{"pun": "Why do scientists prefer Python? Because it's snake_case!", "github_username": "data_scientist"}
+{"pun": "What do you call a NumPy array that's always late? A procrastinator!", "github_username": "numpy_fan"}
+{"pun": "Why did the pandas DataFrame go to therapy? It had too many issues!", "github_username": "pandas_lover"}
