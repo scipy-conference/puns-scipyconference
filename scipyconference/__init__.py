@@ -8,7 +8,9 @@ Use it to control the top-level API of your Python data science project.
 """
 
 import random
+
 import numpy as np
+
 from .bots import punbot
 
 
