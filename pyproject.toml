@@ -72,7 +72,7 @@ requires-python = ">=3.10"
 dependencies = [
     "pyprojroot",
     "typer",
-    "llamabot[all]>=0.12.9",
+    "llamabot>=0.12.11,<0.13",
 ]
 readme = "README.md"
 

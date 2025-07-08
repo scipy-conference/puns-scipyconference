@@ -37,5 +37,5 @@ punbot = lmb.SimpleBot(
     system_prompt=punbot_sysprompt(),
     model_name=os.getenv("PUNBOT_MODEL_NAME", "gpt-4.1"),
     api_base=os.getenv("PUNBOT_API_BASE", "https://api.openai.com/v1"),
-    temperature=0.7,
+    temperature=2.7,
 )
