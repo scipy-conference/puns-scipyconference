@@ -60,6 +60,9 @@ select = ["E", "F", "I"]
 [tool.setuptools]
 include-package-data = true
 
+[tool.setuptools.package-data]
+scipyconference = ["puns.json"]
+
 [tool.setuptools.packages.find]
 where = ["."]
 namespaces = false
