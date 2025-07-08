@@ -13,6 +13,8 @@ import numpy as np
 
 from .bots import punbot
 
+__all__ = ["create_puns"]
+
 
 def create_puns(number: int, prompt: str = ""):
     """Create `number` of puns for the SciPy conference."""
