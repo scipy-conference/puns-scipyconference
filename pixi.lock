@@ -6387,7 +6387,7 @@ packages:
 - pypi: ./
   name: scipyconference
   version: 0.0.1
-  sha256: 374f66d7471a71ecbb61aed7d6547cbf91e5bffa6c64186137153d8e9c8fef80
+  sha256: d050a5d47bc221177c87503ed6f2d3aa788afd0414d67ebd3d72089bc3e6c5fe
   requires_dist:
   - pyprojroot
   - typer
