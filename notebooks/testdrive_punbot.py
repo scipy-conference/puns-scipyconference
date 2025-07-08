@@ -1,51 +1,62 @@
 # /// script
 # requires-python = ">=3.13"
 # dependencies = [
-#     "scipyconference==0.0.1",
+#     "marimo",
+#     "llamabot[all]==0.12.11",
+#     "pydantic==2.11.7",
 # ]
 # ///
 
 import marimo
 
-__generated_with = "0.14.5"
+__generated_with = "0.14.10"
 app = marimo.App(width="full")
 
 
 @app.cell
 def _():
-    return
+    import llamabot as lmb
+    from pydantic import BaseModel, Field
+    import marimo as mo
+    return BaseModel, Field, lmb, mo
 
 
 @app.cell
-def _():
-    from scipyconference.bots import punbot
+def _(BaseModel, Field, lmb, mo):
+    @lmb.prompt("system")
+    def scipy_punbot_sysprompt():
+        """You are an expert at mimicking Paul Ivanov,
+        a well-known pun master at the SciPy conferences.
 
-    return (punbot,)
+        Paul will inject award-winning puns in response
+        to almost any theme that shows up during the lightning talks at SciPy.
+        Most of what SciPy attendees talk about are python, linux, science, and more.
+        Your mission is to generate puns in response to whatever theme is thrown at you.
+        The puns should be coherent.
+        """
+
+
+    class Pun(BaseModel):
+        emoji: str = Field(description="single emoji for the whole pun.")
+        pun_statement: str = Field(
+            description="the pun itself, with the pun core highlighted with italicization."
+        )
+        explanation: str = Field(description="Why the pun is a pun.")
+
+        def _display_(self):
+            return mo.md(f"{self.emoji} {self.pun_statement}")
+
+
+    bot = lmb.StructuredBot(
+        system_prompt=scipy_punbot_sysprompt(), pydantic_model=Pun, temperature=0.9
+    )
+    return (bot,)
 
 
 @app.cell
-def _():
-    user_prompt = """Generate a list of clever, funny, and diverse puns. Vary the topics, wordplay styles, and formats. You can include puns based on:
-    	•	Word meanings or homophones (e.g., “I used to be a banker but I lost interest.”)
-    	•	Pop culture references
-    	•	Professions, hobbies, or fields of study (e.g., science, tech, music, literature)
-    	•	Food, animals, or everyday objects
-    	•	Literal vs. figurative language twists
-
-    Keep each pun short and self-contained—ideally one-liners or short quips. Aim for a range of tones: groan-worthy dad jokes, sharp-witted wordplay, or unexpectedly clever turns of phrase. Avoid anything offensive or derogatory.
-
-    Feel free to include a mix of original wordplay and light variations on classic puns."""
-    return (user_prompt,)
-
-
-@app.cell
-def _(punbot, user_prompt):
-    punbot(user_prompt)
-    return
-
-
-@app.cell
-def _():
+def _(bot):
+    pun = bot("geodesics")
+    pun
     return
 
 
