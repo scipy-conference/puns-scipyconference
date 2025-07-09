@@ -48,8 +48,6 @@ def create_puns(number: int):
 
     :param int number: Number of puns to generate. Use np.inf for party mode.
     :return: None
-    :rtype: None
-    :raises ImportError: If llamabot is required but not installed.
 
     Examples::
 
