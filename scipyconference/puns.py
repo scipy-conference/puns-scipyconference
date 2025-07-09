@@ -36,33 +36,24 @@ def _read_puns_from_json():
     return puns
 
 
-def create_puns(number: int, prompt: str = ""):
+def create_puns(number: int):
     """
     Create ``number`` of puns for the SciPy conference.
 
     This function generates puns for the SciPy conference community. It can work
-    in three modes:
+    in two modes:
 
     1. Community-curated puns (default): Reads from puns.json file
-    2. LLM-generated puns: Uses AI to generate puns based on a prompt
     3. Party mode: Creates a celebration with random emojis when number is np.inf
 
     :param int number: Number of puns to generate. Use np.inf for party mode.
-    :param str prompt: Prompt for LLM-generated puns. Only used when LLM mode is active.
     :return: None
     :rtype: None
     :raises ImportError: If llamabot is required but not installed.
-    :notes:
-        The function automatically chooses between community-curated and LLM-generated
-        puns based on environment variables:
-        - If any of PUNBOT_API_KEY, PUNBOT_MODEL_NAME, or PUNBOT_API_BASE are set,
-          it will attempt to use LLM-generated puns
-        - Otherwise, it will use community-curated puns from puns.json
 
     Examples::
 
         create_puns(3)  # Generate 3 community-curated puns
-        create_puns(1, "pandas")  # Generate 1 LLM pun about pandas
         create_puns(np.inf)  # Create a party celebration
     """
     if number is np.inf:
