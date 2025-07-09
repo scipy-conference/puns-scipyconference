@@ -11,10 +11,6 @@ Made with ❤️ by the SciPy Conference Organizers.
 pip install scipyconference
 ```
 
-### With LLM support (for AI-generated puns)
-```bash
-pip install scipyconference[llm]
-```
 
 ## Contributing
 
@@ -27,6 +23,7 @@ Our goal is to maintain minimal dependencies and scaffolding to ensure we can ge
 ### How to contribute puns
 
 Contributing new puns is simple! Just edit the `scipyconference/puns.json` file and add your pun to the collection. The file contains a JSON array of pun objects - add yours following the same format.
+Adding your GitHub handle for pun attribution is optional.
 
 ## Get started for development
 
