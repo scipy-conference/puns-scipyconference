@@ -1,3 +1,7 @@
+// This collection of puns are curated by the SciPy community.
+// GitHub usernames are optional, but encouraged.
+// Please ensure that the puns are sourced from the conference itself,
+// whether it was you who made the pun or if you overheard it.
 {"pun": "this is a pun", "github_username": "example_user"}
 {"pun": "this is another pun", "github_username": "another_user"}
 {"pun": "Why do scientists prefer Python? Because it's snake_case!", "github_username": "data_scientist"}
