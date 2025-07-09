@@ -13,13 +13,11 @@ Examples::
     create_puns(np.inf)
 """
 
-import os
 import random
 from pathlib import Path
 
 import numpy as np
 
-from .bots import punbot
 
 __all__ = ["create_puns"]
 
@@ -36,39 +34,17 @@ def _read_puns_from_json():
         Returns empty list if file is not found or malformed.
     :rtype: list
     """
-    pun_path = Path(__file__).parent / Path("puns.json")
+    pun_path = Path(__file__).parent / "puns.json"
     puns = []
-    try:
-        with open(pun_path, "r") as f:
-            for line in f:
-                line = line.strip()
-                if line:
-                    import json
+    with open(pun_path, "r") as f:
+        for line in f:
+            line = line.strip()
+            if line:
+                import json
 
-                    data = json.loads(line)
-                    puns.append(data)
-        return puns
-    except (FileNotFoundError, json.JSONDecodeError):
-        return []
-
-
-def _should_use_llm():
-    """
-    Check if we should use LLM-generated puns based on environment variables.
-
-    Determines whether to use LLM-generated puns by checking if any of the
-    PUNBOT_* environment variables are set.
-
-    :return: True if any PUNBOT_* environment variables are set, False otherwise.
-    :rtype: bool
-    """
-    return any(
-        [
-            os.getenv("PUNBOT_API_KEY"),
-            os.getenv("PUNBOT_MODEL_NAME"),
-            os.getenv("PUNBOT_API_BASE"),
-        ]
-    )
+                data = json.loads(line)
+                puns.append(data)
+    return puns
 
 
 def create_puns(number: int, prompt: str = ""):
@@ -127,25 +103,13 @@ def create_puns(number: int, prompt: str = ""):
         for _ in range(random_repeats):
             print(" ".join(random.sample(party_emojis, random.randint(5, 15))))
     else:
-        if _should_use_llm():
-            if punbot is None:
-                print("llamabot is required for LLM-generated puns.")
-                print("Install it with: pip install scipyconference[llm]")
-                print(
-                    "Or use community-curated puns by not setting PUNBOT_* environment variables."  # noqa: E501
-                )
-                return
-            for i in range(number):
-                print("🤖🐍:")
-                punbot(prompt)
-        else:
-            puns = _read_puns_from_json()
-            if not puns:
-                print(
-                    "No puns found in puns.json. Consider adding some community-curated puns!"  # noqa: E501
-                )
-                return
-            selected_puns = random.choices(puns, k=number)
-            for pun_data in selected_puns:
-                print()
-                print(f"@{pun_data['github_username']}: {pun_data['pun']}")
+        puns = _read_puns_from_json()
+        if not puns:
+            print(
+                "No puns found in puns.json. Consider adding some community-curated puns!"  # noqa: E501
+            )
+            return
+        selected_puns = random.choices(puns, k=number)
+        for pun_data in selected_puns:
+            print()
+            print(f"@{pun_data.get('github_username', 'anon')}: {pun_data['pun']}")
