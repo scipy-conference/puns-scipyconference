@@ -21,8 +21,7 @@ def create_puns(number=1):
     all_puns = sorted(Table.read(pun_path, format='pandas.json')['pun'])
     if number is np.inf:
         # TODO: make this to do something really special
-        number = len(all_puns)
-
+        return '🦀🦀🦀'
     selected_puns = random.sample(all_puns, number)
 
     return selected_puns
