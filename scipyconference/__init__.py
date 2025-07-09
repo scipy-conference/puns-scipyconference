@@ -7,10 +7,14 @@ when the appropriate environment variables are set.
 
 Examples::
 
-    from scipyconference import create_puns
-    create_puns(3)
-    create_puns(1, "pandas dataframes")
-    create_puns(np.inf)
+    import scipyconference as conf
+    import numpy as np
+
+    # Generate 3 community-curated puns
+    conf.create_puns(3)
+
+    # Generate a party celebration with random emojis
+    conf.create_puns(np.inf)
 """
 
 from .puns import create_puns
