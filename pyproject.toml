@@ -1,0 +1,27 @@
+# https://setuptools.pypa.io/en/latest/userguide/quickstart.html
+[build-system]
+requires = ["setuptools>=61.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools]
+include-package-data = true
+
+[tool.setuptools.package-data]
+scipyconference = ["puns.json"]
+
+[tool.setuptools.packages.find]
+where = ["."]
+namespaces = false
+
+[project]
+name = "scipyconference"
+version = "0.2"
+# NOTE: move dependencies into this section if you need to distribute the project as a Python package.
+requires-python = ">=3.10"
+dependencies = [
+    "numpy",
+]
+readme = "README.md"
+
+[project.scripts]
+scipyconf = "scipyconference.cli:app"
