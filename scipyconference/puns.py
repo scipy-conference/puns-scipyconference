@@ -11,6 +11,43 @@ from pathlib import Path
 import numpy as np
 
 
+class objectionable_(str):
+    """
+    A string subclass. These puns are so bad, type(pun) == np.objectionable_.
+
+    Blame @anzelpwj for the idea.
+    """
+    pass
+
+objectionable_.__module__ = 'np'  # Making the type properly render as being np
+np.objectionable_ = objectionable_
+
+PARTY_EMOJIS = [
+    "🎉",
+    "🎊",
+    "🎈",
+    "🎂",
+    "🍰",
+    "🎁",
+    "🎪",
+    "🎭",
+    "🎨",
+    "🎯",
+    "🎲",
+    "🎮",
+    "🎸",
+    "🎹",
+    "🎺",
+    "🎻",
+    "🎤",
+    "🎧",
+    "🎵",
+    "🎶",
+    "⚡",
+    "🦀",
+]
+
+
 def _read_puns_from_json():
     """
     Read puns from the JSONL file.
@@ -36,7 +73,7 @@ def _read_puns_from_json():
     return puns
 
 
-def create_puns(number: int):
+def create_puns(number: int, return_puns: bool = False) -> list[np.objectionable_] | None:
     """
     Create ``number`` of puns for the SciPy conference.
 
@@ -47,41 +84,25 @@ def create_puns(number: int):
     3. Party mode: Creates a celebration with random emojis when number is np.inf
 
     :param int number: Number of puns to generate. Use np.inf for party mode.
-    :return: None
+    :param bool return_puns: If False, just print puns. Otherwise return them. Default False.
+
+    :return: Either None (if not return_puns) or a list of puns.    
 
     Examples::
 
         create_puns(3)  # Generate 3 community-curated puns
         create_puns(np.inf)  # Create a party celebration
+        create_puns(3, return_puns=True)  # Gives you a list of puns
     """
     if number is np.inf:
-        party_emojis = [
-            "🎉",
-            "🎊",
-            "🎈",
-            "🎂",
-            "🍰",
-            "🎁",
-            "🎪",
-            "🎭",
-            "🎨",
-            "🎯",
-            "🎲",
-            "🎮",
-            "🎸",
-            "🎹",
-            "🎺",
-            "🎻",
-            "🎤",
-            "🎧",
-            "🎵",
-            "🎶",
-            "⚡",
-            "🦀",
-        ]
         random_repeats = random.randint(50, 200)
-        for _ in range(random_repeats):
-            print(" ".join(random.sample(party_emojis, random.randint(5, 15))))
+        return_vals = [''] * random_repeats
+        for ii in range(random_repeats):
+            return_vals[ii] = " ".join(random.sample(PARTY_EMOJIS, random.randint(5, 15)))
+        if return_puns:
+            return [np.objectionable_(emojis) for emojis in return_vals]
+        else:
+            print("\n".join(return_vals))
     else:
         puns = _read_puns_from_json()
         if not puns:
@@ -90,6 +111,11 @@ def create_puns(number: int):
             )
             return
         selected_puns = random.choices(puns, k=number)
-        for pun_data in selected_puns:
-            print()
-            print(f"@{pun_data.get('github_username', 'anon')}: {pun_data['pun']}")
+        if return_puns:
+            return [
+                np.objectionable_(f"@{pun_data.get('github_username', 'anon')}: {pun_data['pun']}")
+                for pun_data in selected_puns]
+        else:
+            for pun_data in selected_puns:
+                print()
+                print(f"@{pun_data.get('github_username', 'anon')}: {pun_data['pun']}")
