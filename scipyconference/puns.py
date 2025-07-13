@@ -81,7 +81,7 @@ def create_puns(number: int, return_puns: bool = False) -> list[np.objectionable
     in two modes:
 
     1. Community-curated puns (default): Reads from puns.json file
-    3. Party mode: Creates a celebration with random emojis when number is np.inf
+    2. Party mode: Creates a celebration with random emojis when number is np.inf
 
     :param int number: Number of puns to generate. Use np.inf for party mode.
     :param bool return_puns: If False, just print puns. Otherwise return them. Default False.
@@ -119,3 +119,11 @@ def create_puns(number: int, return_puns: bool = False) -> list[np.objectionable
             for pun_data in selected_puns:
                 print()
                 print(f"@{pun_data.get('github_username', 'anon')}: {pun_data['pun']}")
+
+
+def punisher() -> None:
+    """
+    A simple utility function to punish the user with a single community-curated pun.
+    """
+    punishment = create_puns(1, return_puns=True)
+    print(punishment[0])
