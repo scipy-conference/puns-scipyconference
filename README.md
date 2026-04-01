@@ -41,14 +41,11 @@ To contribute new puns:
    ```
 4. Edit `scipyconference/puns.json` with your favorite editor:
    ```bash
-   # Using nano
-   nano scipyconference/puns.json
+   # Using vi
+   vi scipyconference/puns.json
 
    # Using vim
    vim scipyconference/puns.json
-
-   # Using emacs
-   emacs scipyconference/puns.json
    ```
 5. Save your changes, and then commit and push your changes:
    ```bash
